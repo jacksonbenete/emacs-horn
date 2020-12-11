@@ -45,11 +45,8 @@
   :group 'emacs)
 
 (defcustom horn-default-list 
-  '(("Dashboard" . new-dashboard)
-    ("New Scratch" . create-scratch-buffer)
-    ("Shell" . shell)
+  '(("Shell" . shell)
     ("Eshell" . eshell)
-    ("Deft" . deft)
     ("Magit" . magit))
   "Commonly used modes or functions to be called."
   ;; :type '(alist :key-type string :value-type symbol)
