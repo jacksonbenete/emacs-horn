@@ -54,10 +54,15 @@
   :group 'horn)
 
 ;; TODO: recover buffer-list and organize it like ibuffer
-;; (defun horn-call-buffer ()
-;;   "List the current oppened buffers to be called."
-;;   (interactive)
-;;   (message "horn-call-buffer"))
+(defun horn-call-buffer ()
+  "List the current oppened buffers to be called."
+  (interactive)
+  ;; customization
+  (speedbar-frame-mode)
+  (speedbar-change-initial-expansion-list "buffers")
+  (speedbar-refresh)
+  (message "horn-call-buffer"))
+(global-set-key (kbd "C-x C-b") 'horn-call-buffer)
 
 (defun horn-call-mode ()
   "Select a mode from defined list to be called."
