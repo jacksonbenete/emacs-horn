@@ -38,9 +38,10 @@ Horn aims to offer ibuffer organization for a ivy-switch-buffer -like interface.
 
 ## Instalation
 
-Soon on Melpa.
+This is a very much simple package, more like a toy for learning Elisp.
+It will not be on Melpa.
 
-For now, clone to your `.emacs.d/` and `require` the package in your `init.el`.
+Clone to your `.emacs.d/` and `require` the package in your `init.el`.
 
 ```elisp
 ;;; Horn
@@ -73,7 +74,7 @@ the list.
 The second parameter, followed by a `dot` is the function or mode name.
 
 ## TODO
-- Work on parsing the buffer list.
+- Work on parsing the buffer list without third party functions.
 
 [1]: ./screenshots/emacs-horn-full-list.png
 [2]: ./screenshots/emacs-horn-completing.png
