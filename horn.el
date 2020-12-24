@@ -74,6 +74,10 @@
   :type '(alist :key-type string :value-type string)
   :group 'horn)
 
+(defvar horn-literate-p nil
+  "If horn-literate-p is non-nill it will append ^ at the beginning
+of the caller functions.")
+
 ;; LustyExplorer Code
 ;; -------------------------------------------------------------------
 (defun lusty-buffer-list ()
@@ -119,23 +123,24 @@ The first buffer on list is always the last visited buffer."
 ;; TODO: recover buffer-list and organize it like ibuffer
 ;;;###autoload
 (defun horn-call-buffer ()
-  "List the current oppened buffers to be called."
+  "List the current opened buffers to be called."
   (interactive)
-  ;; customization
-    (let* ((visible-buffers (lusty-filter-buffers (lusty-buffer-list)))
-	  (visible-buffers-plist (make-plist visible-buffers))
-	  (key (completing-read "Switch to: "
-				visible-buffers-plist nil nil "^"))
-	  (val (alist-get key visible-buffers-plist nil nil #'string=)))
-      (message "Horn called buffer: %s" val)
-      (switch-to-buffer val)))
+  (let* ((visible-buffers (lusty-filter-buffers (lusty-buffer-list)))
+	 (visible-buffers-plist (make-plist visible-buffers))
+	 (key (completing-read "Buffer: "
+			       visible-buffers-plist nil nil
+			       (when horn-literate-p "^")))
+	 (val (alist-get key visible-buffers-plist nil nil #'string=)))
+    (message "Horn called buffer: %s" val)
+    (switch-to-buffer val)))
 (global-set-key (kbd "C-x C-b") 'horn-call-buffer)
 
 ;;;###autoload
 (defun horn-call-mode ()
   "Select a mode from defined list to be called."
   (interactive)
-  (let* ((key (completing-read "Call: " horn-default-list nil nil "^"))
+  (let* ((key (completing-read "Call: " horn-default-list nil nil
+			       (when horn-literate-p "^")))
 	 (val (alist-get key horn-default-list nil nil #'string=)))
     (message "Horn called mode or function: %s" key)
     (funcall val)))
